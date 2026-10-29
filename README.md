@@ -1,25 +1,27 @@
-Enterprise Dual Stack SuperLab
 
-📌 Descripción
+# Enterprise Dual Stack SuperLab
+
+## 📌 Descripción
 
 Laboratorio de red empresarial desarrollado en **Cisco Packet Tracer**, integrando tecnologías de switching, routing IPv4/IPv6, servicios de red y seguridad.
 
 El objetivo fue configurar una topología integrada, verificar la conectividad entre sus diferentes segmentos y resolver problemas mediante comandos de diagnóstico.
 
-🛠️ Tecnologías implementadas
-Switching
+## 🛠️ Tecnologías implementadas
+
+### Switching
 - VLANs y trunks 802.1Q.
 - VTP versión 2.
 - EtherChannel mediante LACP.
 - Rapid PVST+.
 
- Routing
+### Routing
 - Router-on-a-Stick.
 - OSPFv2, área 0.
 - Routing estático IPv6.
 - Dual Stack (IPv4/IPv6).
 
- Servicios de red
+### Servicios de red
 - DHCP.
 - NAT/PAT.
 - SSH.
@@ -27,13 +29,13 @@ Switching
 - Syslog.
 - SNMPv2c.
 
- Seguridad
+### Seguridad
 - ACLs IPv4 e IPv6.
 - Port Security: `shutdown`, `restrict` y `protect`.
 - DHCP Snooping.
 - Dynamic ARP Inspection (DAI).
 
- 🌐 Topología
+## 🌐 Topología
 
 La red está compuesta por:
 
@@ -47,7 +49,7 @@ Los switches forman una topología redundante con enlaces trunk y EtherChannel.
 
 R1 y R2 proporcionan conectividad a las VLAN mediante Router-on-a-Stick. R3 conecta la red interna con el segmento externo.
 
- VLANs y direccionamiento IPv4
+### VLANs y direccionamiento IPv4
 
 | VLAN | Segmento | Red IPv4 |
 |---|---|---|
@@ -57,7 +59,7 @@ R1 y R2 proporcionan conectividad a las VLAN mediante Router-on-a-Stick. R3 cone
 | 99 | Administración | 192.168.99.0/24 |
 | 100 | Servidores | 172.16.10.0/24 |
 
- Direccionamiento IPv6
+### Direccionamiento IPv6
 
 | Segmento | Red IPv6 |
 |---|---|
@@ -66,7 +68,7 @@ R1 y R2 proporcionan conectividad a las VLAN mediante Router-on-a-Stick. R3 cone
 | IT | 2001:DB8:30::/64 |
 | Servidores | 2001:DB8:100::/64 |
 
- 🔐 Acceso a los routers
+## 🔐 Acceso a los routers
 
 Los routers R1, R2 y R3 tienen configurada una contraseña para acceder al modo privilegiado.
 
@@ -76,7 +78,7 @@ También se configuró SSH para administración remota, con acceso controlado me
 
 > Las credenciales corresponden exclusivamente a este laboratorio de Packet Tracer.
 
- 🔍 Configuración y verificación
+## 🔍 Configuración y verificación
 
 Se realizaron pruebas para comprobar:
 
@@ -93,11 +95,11 @@ Se realizaron pruebas para comprobar:
 - Recepción de eventos Syslog.
 - Modos de violación de Port Security.
 
-🛡️ DHCP Snooping y DAI
+## 🛡️ DHCP Snooping y DAI
 
 Ambas tecnologías se configuraron en **SW1, únicamente para la VLAN 10**.
 
- DHCP Snooping
+### DHCP Snooping
 
 Se habilitó DHCP Snooping y se configuró `Gi0/1`, conectada a R1, como interfaz confiable.
 
@@ -109,7 +111,7 @@ Se verificó la siguiente entrada en la tabla de bindings:
 |---|---|---|---|
 | 192.168.10.21 | 00:09:7C:E5:94:B4 | 10 | Fa0/1 |
 
- Troubleshooting: DHCP Option 82
+### Troubleshooting: DHCP Option 82
 
 Después de activar DHCP Snooping, PC1 dejó de obtener una dirección IPv4 mediante DHCP.
 
@@ -123,7 +125,7 @@ no ip dhcp snooping information option
 
 Después de desactivar la inserción de Option 82, PC1 volvió a recibir su dirección IPv4 y DHCP Snooping permaneció habilitado.
 
-Dynamic ARP Inspection (DAI)
+### Dynamic ARP Inspection (DAI)
 
 Se habilitó DAI en VLAN 10 y se configuró `Gi0/1` como interfaz confiable.
 
@@ -137,21 +139,21 @@ Las verificaciones confirmaron:
 
 **Limitación:** los contadores de inspección permanecieron en cero, por lo que no fue posible confirmar el procesamiento o bloqueo efectivo de paquetes ARP.
 
- ⚠️ Limitaciones de Packet Tracer
+## ⚠️ Limitaciones de Packet Tracer
 
- SNMP
+### SNMP
 
 Se configuró SNMPv2c en R1, R2 y R3.
 
 La configuración se comprobó mediante `show running-config`, pero no fue posible realizar pruebas completas de consultas SNMP desde un administrador de red.
 
- DAI
+### DAI
 
 DAI quedó habilitado en VLAN 10 y la conectividad legítima funcionó correctamente.
 
 Sin embargo, Packet Tracer no permitió confirmar completamente la inspección efectiva de paquetes ARP mediante los contadores disponibles.
 
- 📚 Comandos de verificación
+## 📚 Comandos de verificación
 
 ```cisco
 show vlan brief
@@ -179,7 +181,7 @@ show running-config
 
 También se realizaron pruebas de conectividad mediante `ping` y verificaciones de acceso remoto por SSH.
 
- 🎯 Conclusión
+## 🎯 Conclusión
 
 El laboratorio permitió integrar tecnologías de switching, routing, servicios y seguridad dentro de una misma topología empresarial.
 
